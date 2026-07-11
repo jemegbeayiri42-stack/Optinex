@@ -1,1 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glamour Dashboard</title>
 
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:linear-gradient(180deg,#111,#050505,#000);
+color:white;
+padding:20px;
+}
+
+.logo{
+font-size:34px;
+font-weight:800;
+color:#FFD700;
+margin-bottom:20px;
+}
+
+.greeting{
+color:#aaa;
+margin-bottom:5px;
+}
+
+.username{
+font-size:28px;
+font-weight:700;
+margin-bottom:20px;
+}
+
+.balance-card{
+background:linear-gradient(135deg,#FFD700,#D4AF37);
+color:black;
+padding:25px;
+border-radius:25px;
+margin-bottom:20px;
+box-shadow:0 10px 30px rgba(255,215,0,.25);
+}
+
+.badge{
+display:inline-block;
+background:black;
+color:#FFD700;
+padding:6px 12px;
+border-radius:30px;
+font-size:12px;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.balance{
+font-size:40px;
+font-weight:800;
+margin:10px 0;
+}
+
+.toggle-btn{
+margin-top:10px;
+padding:10px 16px;
+background:#000;
+color:#FFD700;
+border:1px solid rgba(255,215,0,.4);
+border-radius:30px;
+font-weight:600;
+cursor:pointer;
+}
+
+.actions{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+}
+
+.actions a{
+flex:1;
+background:#181818;
+border:1px solid rgba(255,215,0,.15);
+color:#FFD700;
+text-decoration:none;
+text-align:center;
+padding:15px;
+border-radius:15px;
+font-weight:600;
+}
+
+.card{
+background:#151515;
+padding:20px;
+border-radius:18px;
+margin-bottom:15px;
+border:1px solid rgba(255,215,0,.1);
+}
+
+.gold{
+color:#FFD700;
+}
+
+.module{
+background:#151515;
+padding:15px;
+border-radius:15px;
+margin-bottom:10px;
+border:1px solid rgba(255,215,0,.08);
+}
+
+.module-title{
+font-weight:600;
+margin-bottom:5px;
+}
+
+.ref-link{
+background:#1c1c1c;
+padding:12px;
+border-radius:10px;
+word-break:break-all;
+margin-top:10px;
+}
+
+.copy-btn{
+width:100%;
+margin-top:15px;
+padding:14px;
+background:#FFD700;
+color:black;
+border:none;
+border-radius:40px;
+font-weight:700;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="logo">Glamour</div>
+
+<p class="greeting">Good day,</p>
+
+<h2 class="username" id="welcomeUser">Hi, Member 👋</h2>
+
+<!-- BALANCE -->
+<div class="balance-card">
+<div class="badge">PREMIUM</div>
+
+<h3>Total Balance</h3>
+
+<div class="balance" id="balanceDisplay">₦14,000.00</div>
+
+<button class="toggle-btn" onclick="toggleBalance()">
+Show in Euro
+</button>
+
+<p>•••• •••• 4782</p>
+</div>
+
+<!-- ACTIONS -->
+<div class="actions">
+<a href="activation.html">⚡ Activate</a>
+<a href="activation.html">💸 Withdraw</a>
+<a href="activation.html">📋 History</a>
+</div>
+
+<!-- ACCOUNT -->
+<div class="card">
+<h3 class="gold">🔒 Account Not Activated</h3>
+<br>
+<p>Pay the one-time ₦14,000 fee to unlock all modules and start earning instantly.</p>
+</div>
+
+<h2 class="gold">EARNING MODULES</h2>
+<br>
+
+<div class="module"><div class="module-title">🎥 Glam FaceTime</div>Chat with Europeans, earn per session<br>€2 / hour</div>
+<div class="module"><div class="module-title">✍️ Glam Script2Cash</div>Write scripts for content creators<br>€2 / script</div>
+<div class="module"><div class="module-title">📱 GlamStatus</div>Post like WhatsApp Status<br>€0.5 / view</div>
+<div class="module"><div class="module-title">🌙 Glam DarkMode</div>Earn extra at night<br>€2 extra/hr</div>
+<div class="module"><div class="module-title">🗣️ Glam Lingua</div>Teach language<br>€2 / hour</div>
+<div class="module"><div class="module-title">🍲 Glam Cuisine</div>Cook & share recipes<br>€3 / recipe</div>
+<div class="module"><div class="module-title">📡 Glam Realtime</div>Daily vibe sharing<br>₦3,000 / 15min</div>
+<div class="module"><div class="module-title">🎙️ Glam VoiceVault</div>Voice earnings<br>€2 / listen</div>
+<div class="module"><div class="module-title">💼 GlamWorks</div>Remote jobs<br>£9 / hour</div>
+<div class="module"><div class="module-title">🏃 Glam Fitness</div>Fitness tracking<br>₦500 / km</div>
+
+<br>
+
+<div class="card">
+<h3 class="gold">YOUR PRIVATE NETWORK LINK</h3>
+
+<div class="ref-link" id="refLink">
+glamour.app/?ref=member001
+</div>
+
+<button class="copy-btn" onclick="copyReferral()">
+Copy Referral Link
+</button>
+</div>
+
+<script>
+const nairaBalance = 14000;
+const rate = 2000;
+let showingEuro = false;
+
+const user = localStorage.getItem("glamourUser");
+const username = localStorage.getItem("glamourUsername");
+
+if(user){
+document.getElementById("welcomeUser").innerHTML =
+"Hi, " + user + " 👋";
+}
+
+if(username){
+document.getElementById("refLink").innerHTML =
+"glamour.app/?ref=" + username;
+}
+
+function toggleBalance(){
+
+const display =
+document.getElementById("balanceDisplay");
+
+const btn =
+document.querySelector(".toggle-btn");
+
+if(!showingEuro){
+
+let euro = nairaBalance / rate;
+
+display.innerHTML = "€" + euro.toFixed(2);
+
+btn.innerHTML = "Show in Naira";
+
+showingEuro = true;
+
+}else{
+
+display.innerHTML = "₦" + nairaBalance.toLocaleString();
+
+btn.innerHTML = "Show in Euro";
+
+showingEuro = false;
+
+}
+
+}
+
+function copyReferral(){
+
+const username =
+localStorage.getItem("glamourUsername") || "member001";
+
+navigator.clipboard.writeText(
+"glamour.app/?ref=" + username
+);
+
+alert("Referral link copied successfully!");
+}
+</script>
+
+</body>
+  </html>
