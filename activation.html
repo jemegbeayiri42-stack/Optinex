@@ -1,1 +1,130 @@
+text-decoration:none;
+text-align:center;
+padding:15px;
+border-radius:50px;
+font-weight:700;
+margin-top:15px;
+}
 
+.small{
+color:#bbb;
+line-height:1.7;
+}
+
+.later{
+display:block;
+text-align:center;
+margin-top:20px;
+color:#87CEEB;
+text-decoration:none;
+}
+
+</style></head><body><div class="container"><!-- PAGE 1 --><div id="activatePage"><div class="card"><h2>🔒 Activate Your Account</h2><br><p>
+Unlock all 10 earning modules and withdraw instantly.
+</p><br><div class="feature">✓ ₦12,000 instant bonus sent to your bank</div>
+<div class="feature">✓ Earn ₦3,000 every 15 minutes of activity</div>
+<div class="feature">✓ Access all 10 earning modules immediately</div>
+<div class="feature">✓ €6 credit bonus (withdrawable)</div>
+<div class="feature">✓ No withdrawal delays — anytime, any bank</div><br><p>One-time activation fee</p><h1 class="gold big">
+₦14,000
+</h1><button class="activate-btn" onclick="showPayment()">
+Activate Now →
+</button><a href="dashboard.html" class="later">
+Maybe Later
+</a></div></div><!-- PAGE 2 --><div id="paymentPage" style="display:none;"><div class="card"><h1 class="gold">
+Optinex
+</h1><br><h2>SECURE PAYMENT</h2><p>Complete Your Payment</p><br><p>Activating: Optinex Premium Pass</p><br><p>Amount to Pay</p><h1 class="gold big">
+₦14,000
+</h1><br><p>Time Remaining</p><div id="paymentTimer" class="timer">
+5:00
+</div><br><p>
+Transfer ₦14,000 to the account below
+</p><div class="bank"><h3 class="gold">Paga</h3><p>Option 1</p><br><p>Account Number</p><h2>0365001762</h2><br><p>Account Name</p><strong>AYIRI JEMEGBE</strong>
+
+<button class="copy-btn" onclick="copyPaga()">
+Copy Paga Details
+</button></div><p class="small">After transferring, tap the button below and send your receipt on WhatsApp.
+
+</p><button class="activate-btn" onclick="paymentMade()">
+I've Made Payment
+</button></div></div><!-- PAGE 3 --><div id="proofPage" style="display:none;"><div class="card center"><h2>Verification In Progress</h2><br><p>
+Preparing secure verification channel...
+</p><br><div id="proofCountdown" class="timer">
+10
+</div><a
+id="whatsappBtn"
+class="whatsapp-btn"
+href="https://wa.me/2347086862033?text=Hello%20Admin,%0A%0AI%20have%20successfully%20completed%20my%20Optinex%20Premium%20activation%20payment.%0A%0AKindly%20verify%20my%20payment%20and%20activate%20my%20account.%0A%0AI%20have%20attached%20my%20payment%20receipt%20or%20screenshot%20below%20for%20confirmation.%0A%0AThank%20you.%20I%20look%20forward%20to%20accessing%20my%20dashboard%20and%20earning%20modules."
+target="_blank">
+
+Send Proof via WhatsApp
+
+</a></div></div></div><script>
+
+function showPayment(){
+
+document.getElementById("activatePage").style.display="none";
+document.getElementById("paymentPage").style.display="block";
+
+let timeLeft=300;
+
+const timer=setInterval(()=>{
+
+let minutes=Math.floor(timeLeft/60);
+let seconds=timeLeft%60;
+
+document.getElementById("paymentTimer").innerHTML=
+minutes+":"+(seconds<10?"0":"")+seconds;
+
+timeLeft--;
+
+if(timeLeft<0){
+
+clearInterval(timer);
+
+document.getElementById("paymentTimer").innerHTML="Expired";
+
+}
+
+},1000);
+
+}
+
+function paymentMade(){
+
+document.getElementById("paymentPage").style.display="none";
+
+document.getElementById("proofPage").style.display="block";
+
+let wait=10;
+
+const countdown=setInterval(()=>{
+
+document.getElementById("proofCountdown").innerHTML=wait;
+
+wait--;
+
+if(wait<0){
+
+clearInterval(countdown);
+
+document.getElementById("whatsappBtn").style.display="block";
+
+}
+
+},1000);
+
+}
+
+function copyPaga(){
+
+navigator.clipboard.writeText(
+"Paga\nAccount Number: 0365001762\nAccount Name: AYIRI JEMEGBE"
+);
+
+alert("Paga details copied!");
+
+}
+
+</script></body>
+                                                                                </html>
